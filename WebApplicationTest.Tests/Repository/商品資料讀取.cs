@@ -27,10 +27,12 @@ namespace WebApplicationTest.Tests.Repository
             //     new Product{ Id=1, Name="商品3", IsEnable=true, Price=100 }
             //};
             ProductRepository.GetAllProduct().Returns(ProductList);
+            var ProductWhere = ProductList.Where(d => d.IsEnable).ToList();
             //Act
-            var Result = ProductRepository.GetAllProduct();
-            //Assert
-            Assert.AreEqual(ProductList, Result);
+            var Result = ProductRepository.GetAllProduct().Where(d => d.IsEnable).ToList();
+            //Assert 
+            // Assert.AreEqual(ProductWhere, Result);
+            CollectionAssert.AreEqual(ProductWhere, Result);
         }
         [TestMethod]
         public void 首頁_商品_讀取單筆資料()
@@ -41,7 +43,7 @@ namespace WebApplicationTest.Tests.Repository
             var product = fixture.Build<Product>()
                 .With(x => x.Price, 150)
                 .Create();
-               
+
             //Product product = new Product() { Id = 1, Name = "商品1", IsEnable = true, Price = 100 };
             ProductRepository.GetProductById(Arg.Any<int>()).Returns(product);
             //Act
