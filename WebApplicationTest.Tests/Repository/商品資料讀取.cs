@@ -37,7 +37,12 @@ namespace WebApplicationTest.Tests.Repository
         {
             //Arrange
             var ProductRepository = Substitute.For<IRepository>();
-            Product product = new Product() { Id = 1, Name = "商品1", IsEnable = true, Price = 100 };
+            Fixture fixture = new Fixture();
+            var product = fixture.Build<Product>()
+                .With(x => x.Price, 150)
+                .Create();
+               
+            //Product product = new Product() { Id = 1, Name = "商品1", IsEnable = true, Price = 100 };
             ProductRepository.GetProductById(Arg.Any<int>()).Returns(product);
             //Act
             var Result = ProductRepository.GetProductById(1);
