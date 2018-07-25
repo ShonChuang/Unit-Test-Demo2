@@ -58,7 +58,13 @@ namespace WebApplicationTest.Tests.Repository
         [TestMethod]
         public void 客製化欄位測試()
         {
-            
+            Fixture fixture = new Fixture();
+            var newData = fixture.Create<Product>();
+            var MyMokedata = fixture.Build<MokeData>()
+                .Do(x => x.ProductList.Add(newData))
+                .With(x => x.SelectProduct, newData)
+                .Create();
+
         }
     }
 
