@@ -21,7 +21,7 @@ namespace WebApplicationTest.Controllers
         public ActionResult GetProduct()
         {
            var Product =  this._repository.GetAllProduct();
-            return View(Product);
+            return View(Product.Where(d=>d.IsEnable).ToList());
         }
 
         public ActionResult Index()
