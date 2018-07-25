@@ -70,7 +70,15 @@ namespace WebApplicationTest.Tests.Repository
 
     public class MokeData
     {
-        public List<Product> ProductList { get; set; }
+        private List<Product> _ProductList = new List<Product>();
+
+        public List<Product> ProductList
+        {
+            get { return _ProductList; }
+            set { _ProductList = value; }
+        }
+
+        //public List<Product> ProductList { get; set; }
         public Product SelectProduct { get; set; }
     }
 }
