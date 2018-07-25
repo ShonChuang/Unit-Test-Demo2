@@ -55,5 +55,16 @@ namespace WebApplicationTest.Tests.Repository
             Assert.IsNotNull(Result);
             Assert.AreEqual(product, Result);
         }
+        [TestMethod]
+        public void 客製化欄位測試()
+        {
+            
+        }
+    }
+
+    public class MokeData
+    {
+        public List<Product> ProductList { get; set; }
+        public Product SelectProduct { get; set; }
     }
 }
