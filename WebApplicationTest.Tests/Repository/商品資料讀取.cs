@@ -30,7 +30,18 @@ namespace WebApplicationTest.Tests.Repository
         [TestMethod]
         public void 首頁_商品_讀取單筆資料()
         {
-
+            //Arrange
+            var ProductRepository = Substitute.For<IRepository>();
+            Product product = new Product() { Id = 1, Name = "商品1", IsEnable = true, Price = 100 };
+            ProductRepository.GetProductById(Arg.Any<int>()).Returns(product);
+            //Act
+            var Result = ProductRepository.GetProductById(1);
+            //Assert
+            ProductRepository.Received().GetProductById(Arg.Any<int>());
+            ProductRepository.Received(1).GetProductById(Arg.Any<int>());
+            ProductRepository.ReceivedWithAnyArgs().GetProductById(Arg.Is<int>(0));
+            Assert.IsNotNull(Result);
+            Assert.AreEqual(product, Result);
         }
     }
 }
