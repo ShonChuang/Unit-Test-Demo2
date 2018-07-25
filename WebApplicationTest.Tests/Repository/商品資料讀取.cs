@@ -61,6 +61,7 @@ namespace WebApplicationTest.Tests.Repository
             Fixture fixture = new Fixture();
             var newData = fixture.Create<Product>();
             var MyMokedata = fixture.Build<MokeData>()
+                .Without(x=>x.ProductList)
                 .Do(x => x.ProductList.Add(newData))
                 .With(x => x.SelectProduct, newData)
                 .Create();
