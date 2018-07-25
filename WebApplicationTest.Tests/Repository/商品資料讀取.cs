@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoFixture;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using WebApplicationTest.Models;
 using WebApplicationTest.Repository;
+using System.Linq;
 
 namespace WebApplicationTest.Tests.Repository
 {
@@ -15,12 +17,15 @@ namespace WebApplicationTest.Tests.Repository
         {
             //Arrange
             var ProductRepository = Substitute.For<IRepository>();
-            List<Product> ProductList = new List<Product>()
-            {
-                 new Product{ Id=1, Name="商品1", IsEnable=true, Price=100 },
-                 new Product{ Id=1, Name="商品2", IsEnable=true, Price=100 },
-                 new Product{ Id=1, Name="商品3", IsEnable=true, Price=100 }
-            };
+            Fixture fixture = new Fixture();
+            var ProductList = fixture.CreateMany<Product>(10)
+                .ToList();
+            //List<Product> ProductList = new List<Product>()
+            //{
+            //     new Product{ Id=1, Name="商品1", IsEnable=true, Price=100 },
+            //     new Product{ Id=1, Name="商品2", IsEnable=true, Price=100 },
+            //     new Product{ Id=1, Name="商品3", IsEnable=true, Price=100 }
+            //};
             ProductRepository.GetAllProduct().Returns(ProductList);
             //Act
             var Result = ProductRepository.GetAllProduct();
