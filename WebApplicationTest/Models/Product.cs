@@ -9,7 +9,7 @@ namespace WebApplicationTest.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Price { get; set; }
+        public Decimal Price { get; set; }
         public bool IsEnable { get; set; }
     }
 }
